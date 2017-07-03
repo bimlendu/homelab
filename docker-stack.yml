@@ -1,0 +1,77 @@
+version: "3.3"
+
+services:
+  traefik:
+    image: traefik
+    networks: 
+      - web
+    ports:
+      - "80:80"
+      - "8080:8080"
+      - "443:443"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /opt/docker/homelab/traefik/logs:/logs
+      - /opt/docker/homelab/traefik/traefik.toml:/etc/traefik/traefik.toml
+      - /opt/ssl/data/wildcard.jarvis.local.net.crt:/cert
+      - /opt/ssl/data/wildcard.jarvis.local.net.key:/key
+    deploy:
+      restart_policy:
+        condition: on-failure
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+
+  visualizer:
+    image: dockersamples/visualizer:stable
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    deploy:
+      labels:
+        - "traefik.tags=utils"
+        - "traefik.backend=visualizer"
+        - "traefik.frontend.rule=Host:visualizer.jarvis.local.net"
+        - "traefik.port=8080"
+        - "traefik.backend.loadbalancer.method=drr"
+        - "traefik.docker.network=homelab_web"
+      restart_policy:
+        condition: on-failure
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+    networks:
+      - app
+      - web
+
+  jenkins:
+    image: registry-private.jarvis.local.net:5002/homelab/jenkins:2.60.1-alpine-b21 
+    networks:
+      - app
+      - web
+    volumes:
+      - /opt/docker/homelab/jenkins/data:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
+    deploy:
+      labels:
+        - "traefik.tags=ci"
+        - "traefik.backend=jenkins"
+        - "traefik.frontend.rule=Host:jenkins.jarvis.local.net"
+        - "traefik.port=8080"
+        - "traefik.backend.loadbalancer.method=drr"
+        - "traefik.docker.network=homelab_web"
+      restart_policy:
+        condition: on-failure
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+
+networks:
+  web:
+    driver: overlay
+  app:
+    driver: overlay
+  db:
+    driver: overlay

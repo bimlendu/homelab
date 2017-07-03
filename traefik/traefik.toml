@@ -1,0 +1,31 @@
+# Global configuration
+debug = true
+traefikLogsFile = "/logs/traefik.log"
+accessLogsFile = "/logs/access.log"
+logLevel = "DEBUG"
+defaultEntryPoints = ["http", "https"]
+
+# Entrypoints definition
+[entryPoints]
+  [entryPoints.http]
+  address = ":80"
+    [entryPoints.http.redirect]
+      entryPoint = "https"
+  [entryPoints.https]
+  address = ":443"
+    [entryPoints.https.tls]
+       [[entryPoints.https.tls.certificates]]
+       CertFile = "/cert"
+       KeyFile = "/key"
+
+# API backend
+[web]
+address = ":8080"
+
+# Docker backend
+[docker]
+endpoint = "unix:///var/run/docker.sock"
+domain = "jarvis.local.net"
+watch = true
+exposedbydefault = true
+swarmmode = true
