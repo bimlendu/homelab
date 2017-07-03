@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
+# shellcheck disable=SC2086
 
 set -e
 
-IMAGE=$( cat Dockerfile | grep FROM | cut -d' ' -f2 )
+IMAGE=$( < Dockerfile grep FROM | cut -d' ' -f2 )
 PRIVATE_REPO="registry-private.jarvis.local.net:5002"
 
 BUILD_NUMBER=$(< BUILD_NUMBER)
