@@ -46,7 +46,7 @@ services:
       - web
 
   jenkins:
-    image: registry-private.jarvis.local.net:5002/homelab/jenkins:2.60.1-alpine-b21 
+    image: registry-private.jarvis.local.net:5002/homelab/jenkins:2.60.1-b27 
     networks:
       - app
       - web
@@ -59,6 +59,26 @@ services:
         - "traefik.backend=jenkins"
         - "traefik.frontend.rule=Host:jenkins.jarvis.local.net"
         - "traefik.port=8080"
+        - "traefik.backend.loadbalancer.method=drr"
+        - "traefik.docker.network=homelab_web"
+      restart_policy:
+        condition: on-failure
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+
+  sonarqube:
+    image: registry-private.jarvis.local.net:5002/homelab/sonarqube:6.4-alpine-b2
+    networks:
+      - app
+      - web
+    deploy:
+      labels:
+        - "traefik.tags=ci"
+        - "traefik.backend=sonarqube"
+        - "traefik.frontend.rule=Host:sonarqube.jarvis.local.net"
+        - "traefik.port=9000"
         - "traefik.backend.loadbalancer.method=drr"
         - "traefik.docker.network=homelab_web"
       restart_policy:

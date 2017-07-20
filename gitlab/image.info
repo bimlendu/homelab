@@ -1,0 +1,135 @@
+/ # ruby -v
+ruby 2.3.4p301 (2017-03-30 revision 58214) [x86_64-linux-musl]
+/# gem env
+RubyGems Environment:
+  - RUBYGEMS VERSION: 2.6.12
+  - RUBY VERSION: 2.3.4 (2017-03-30 patchlevel 301) [x86_64-linux-musl]
+  - INSTALLATION DIRECTORY: /usr/local/bundle
+  - USER INSTALLATION DIRECTORY: /root/.gem/ruby/2.3.0
+  - RUBY EXECUTABLE: /usr/local/bin/ruby
+  - EXECUTABLE DIRECTORY: /usr/local/bundle/bin
+  - SPEC CACHE DIRECTORY: /root/.gem/specs
+  - SYSTEM CONFIGURATION DIRECTORY: /usr/local/etc
+  - RUBYGEMS PLATFORMS:
+    - ruby
+    - x86_64-linux
+  - GEM PATHS:
+     - /usr/local/bundle
+     - /root/.gem/ruby/2.3.0
+     - /usr/local/lib/ruby/gems/2.3.0
+  - GEM CONFIGURATION:
+     - :update_sources => true
+     - :verbose => true
+     - :backtrace => false
+     - :bulk_threshold => 1000
+     - "install" => "--no-document"
+     - "update" => "--no-document"
+  - REMOTE SOURCES:
+     - https://rubygems.org/
+  - SHELL PATH:
+     - /usr/local/bundle/bin
+     - /usr/local/sbin
+     - /usr/local/bin
+     - /usr/sbin
+     - /usr/bin
+     - /sbin
+     - /bin
+/ # gem list
+
+*** LOCAL GEMS ***
+
+bigdecimal (default: 1.2.8)
+bundler (1.15.1)
+did_you_mean (1.0.0)
+io-console (default: 0.4.5)
+json (default: 1.8.3)
+minitest (5.8.5)
+net-telnet (0.1.1)
+power_assert (0.2.6)
+psych (default: 2.1.0)
+rake (10.4.2)
+rdoc (default: 4.2.1)
+rubygems-update (2.6.12)
+test-unit (3.1.5)
+/ # apk info
+WARNING: Ignoring APKINDEX.167438ca.tar.gz: No such file or directory
+WARNING: Ignoring APKINDEX.a2e6dac0.tar.gz: No such file or directory
+musl
+busybox
+alpine-baselayout
+alpine-keys
+zlib
+libcrypto1.0
+libssl1.0
+apk-tools
+scanelf
+musl-utils
+libc-utils
+bzip2
+ca-certificates
+pkgconf
+pkgconfig
+gmp
+gdbm
+libffi
+ncurses-terminfo-base
+ncurses-terminfo
+ncurses-libs
+readline
+zlib-dev
+libffi-dev
+openssl-dev
+libproc
+procps
+libedit
+yaml
+ruby-libs
+yaml-dev
+.ruby-rundeps
+/ # apk info -a .ruby-rundeps
+WARNING: Ignoring APKINDEX.167438ca.tar.gz: No such file or directory
+WARNING: Ignoring APKINDEX.a2e6dac0.tar.gz: No such file or directory
+.ruby-rundeps-0 description:
+virtual meta package
+
+.ruby-rundeps-0 webpage:
+
+
+.ruby-rundeps-0 installed size:
+0
+
+.ruby-rundeps-0 depends on:
+gdbm
+libcrypto1.0
+libffi
+libssl1.0
+musl
+ncurses-libs
+readline
+ruby-libs
+yaml
+zlib
+bzip2
+ca-certificates
+libffi-dev
+openssl-dev
+yaml-dev
+procps
+zlib-dev
+
+.ruby-rundeps-0 provides:
+
+.ruby-rundeps-0 is required by:
+
+.ruby-rundeps-0 contains:
+
+.ruby-rundeps-0 triggers:
+
+.ruby-rundeps-0 has auto-install rule:
+
+.ruby-rundeps-0 affects auto-installation of:
+
+.ruby-rundeps-0 replaces:
+
+.ruby-rundeps-0 license:
+

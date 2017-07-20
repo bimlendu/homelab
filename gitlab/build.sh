@@ -17,8 +17,10 @@ echo $BUILD_NUMBER > BUILD_NUMBER
 
 IMAGE=${IMAGE}-b${BUILD_NUMBER}
 
-docker build --squash --build-arg HOST_DOCKER_GID=${HOST_DOCKER_GID} -t ${IMAGE} -t ${PRIVATE_REPO}/homelab/${IMAGE} .
+docker build --squash -t ${IMAGE} .
 
-docker push ${PRIVATE_REPO}/homelab/${IMAGE}
+#docker build --squash --build-arg HOST_DOCKER_GID=${HOST_DOCKER_GID} -t ${IMAGE} -t ${PRIVATE_REPO}/homelab/${IMAGE} .
 
-curl -s 'https://registry-private.jarvis.local.net:5002/v2/homelab/jenkins/tags/list' | jq
+#docker push ${PRIVATE_REPO}/homelab/${IMAGE}
+
+#curl -s 'https://registry-private.jarvis.local.net:5002/v2/homelab/jenkins/tags/list' | jq
